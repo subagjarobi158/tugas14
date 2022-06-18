@@ -4,5 +4,5 @@ data class pemain(
     var nama : String,
     var foto : Int,
     var role : String,
-    var biograpi : String
+    var biograpy : String
 )

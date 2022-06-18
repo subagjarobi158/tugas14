@@ -1,7 +1,12 @@
 package com.robisubagja.robisubagja
 
+import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Window
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import com.robisubagja.robisubagja.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -57,7 +62,28 @@ class MainActivity : AppCompatActivity() {
         binding.list.adapter =
             Adapterpemain(this, listCharacter, object : Adapterpemain.OnClickListener {
                 override fun detailData(item: pemain?) {
-                    TODO("Not yet implemented")
+                    Dialog(this@MainActivity).apply {
+                        requestWindowFeature(Window.FEATURE_NO_TITLE)
+                        setCancelable(true)
+                        setContentView(R.layout.detail_data_character)
+
+                        val image = this.findViewById<ImageView>(R.id.image_character)
+                        val nama = this.findViewById<TextView>(R.id.txtnamacharacter)
+
+                        val role = this.findViewById<TextView>(R.id.txtrolecharacter)
+                        val biograpy = this.findViewById<TextView>(R.id.txtbiograpycharacter)
+                        val btn = this.findViewById<Button>(R.id.btnclose)
+
+                        image.setImageResource(item?.foto ?:0)
+                        nama.text = "${item?.nama}"
+                        role.text = "${item?.role}"
+                        biograpy.text = "${item?.biograpy}"
+
+                        btn.setOnClickListener{
+                            this.dismiss()
+                        }
+
+                    }.show()
                 }
 
             })
